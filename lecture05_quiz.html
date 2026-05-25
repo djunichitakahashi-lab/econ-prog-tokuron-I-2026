@@ -1769,7 +1769,6 @@ body {
 </div>
 <div class="step-locked-gate" id="gate-t05">🔒 5問すべて正解すると出席レスポン番号が解放されます。</div>
 </div>
-
 <!-- ATTENDANCE -->
 <div class="section" style="margin-top:32px;">
 <div class="sec-label"><span class="s-num">🎫</span>出席コード</div>
@@ -1783,6 +1782,7 @@ body {
 </div>
 </div>
 </div>
+
 
 </main>
 </div>
@@ -1830,7 +1830,7 @@ const PRACTICE_MODE = false;
 // TIMING
 // ════════════════════════════════════════
 const WRONG_LOCKOUT_MS = PRACTICE_MODE ? 500 : 5000;
-const VIDEO_WATCH_MS   = PRACTICE_MODE ? 0   : 120000;
+const VIDEO_WATCH_MS   = PRACTICE_MODE ? 0   : 30000;
 
 // ════════════════════════════════════════
 // THEME
@@ -1971,7 +1971,13 @@ function unlockStep(stepId) {
 // ════════════════════════════════════════
 // VIDEO WATCH TRACKING
 // ════════════════════════════════════════
+// バックグラウンドタブ throttling 対策:
+//   ・クリック時刻を localStorage に保存（タイマー喪失耐性）
+//   ・setTimeout（フォアグラウンド時の素早い反映）+ visibilitychange（背景復帰時の追いつき）+
+//     focus/各種ユーザー操作の 3 重トリガで「経過時間チェック」を走らせる
+//   ・どのトリガでも Date.now() ベースで判定するため、タブが何分凍結していても復帰瞬間にフラグが立つ
 const VIDEO_KEY = 'video_' + VER;
+const VIDEO_CLICK_KEY = 'video_click_' + VER;
 
 function loadVideoWatched() {
   try { return JSON.parse(localStorage.getItem(VIDEO_KEY)) || {}; } catch(e) { return {}; }
@@ -1984,6 +1990,27 @@ function isVideoWatched(stepId) {
 function saveVideoWatched(stepId) {
   const v = loadVideoWatched(); v[stepId] = true;
   try { localStorage.setItem(VIDEO_KEY, JSON.stringify(v)); } catch(e){}
+}
+function loadVideoClicks() {
+  try { return JSON.parse(localStorage.getItem(VIDEO_CLICK_KEY)) || {}; } catch(e) { return {}; }
+}
+function saveVideoClick(stepId) {
+  const v = loadVideoClicks();
+  if (!v[stepId]) {
+    v[stepId] = Date.now();
+    try { localStorage.setItem(VIDEO_CLICK_KEY, JSON.stringify(v)); } catch(e){}
+  }
+}
+function checkAllVideoElapsed() {
+  // 背景タブ throttling で setTimeout が遅れても、ここで追いつかせる
+  const clicks = loadVideoClicks();
+  const now = Date.now();
+  Object.keys(clicks).forEach(stepId => {
+    if (isVideoWatched(stepId)) return;
+    if (now - clicks[stepId] >= VIDEO_WATCH_MS) {
+      markVideoWatched(stepId);
+    }
+  });
 }
 
 function markVideoWatched(stepId) {
@@ -2018,7 +2045,8 @@ function initVideoGates() {
     link.dataset._gated = '1';
 
     link.addEventListener('click', () => {
-      setTimeout(() => markVideoWatched(stepId), VIDEO_WATCH_MS);
+      saveVideoClick(stepId);                                       // 1. クリック時刻を保存（throttling 耐性）
+      setTimeout(() => markVideoWatched(stepId), VIDEO_WATCH_MS);   // 2. 前面なら素早く発火
     });
 
     const indicator = document.createElement('div');
@@ -2053,6 +2081,16 @@ function initVideoGates() {
     const m = panel.id.match(/^panel-(.+)$/);
     if (m) _attach(link, m[1]);
   });
+
+  // バックグラウンドタブ throttling 対策: タブが戻った瞬間 / フォーカス時に経過秒数を再判定
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') checkAllVideoElapsed();
+  });
+  window.addEventListener('focus', checkAllVideoElapsed);
+  window.addEventListener('pageshow', checkAllVideoElapsed);
+
+  // 起動時に即座にチェック（前回セッションで動画を見ていれば即フラグ）
+  checkAllVideoElapsed();
 }
 
 // ════════════════════════════════════════
@@ -2177,7 +2215,7 @@ function launchConfetti() {
 // QUIZ
 // ════════════════════════════════════════
 const stepQuizCount = {
-    't01': { total: 5, correct: 0 },
+  't01': { total: 5, correct: 0 },
   't02': { total: 5, correct: 0 },
   't03': { total: 5, correct: 0 },
   't04': { total: 5, correct: 0 },
