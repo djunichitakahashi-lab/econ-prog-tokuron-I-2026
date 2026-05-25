@@ -1830,7 +1830,11 @@ const PRACTICE_MODE = false;
 // TIMING
 // ════════════════════════════════════════
 const WRONG_LOCKOUT_MS = PRACTICE_MODE ? 500 : 5000;
-const VIDEO_WATCH_MS   = PRACTICE_MODE ? 0   : 30000;
+// 動画視聴フラグは 0 秒固定 = クリック即フラグ。
+// 理由: クイズ問題が「動画を見ないと答えられない」内容なので、待機時間で
+// 視聴を強制する必要がない。むしろ待機時間があると background tab throttling で
+// 数十分遅延する事故が起きる。詳細は .claude/rules/quiz.md「動画視聴フラグの仕様」参照。
+const VIDEO_WATCH_MS   = 0;
 
 // ════════════════════════════════════════
 // THEME
