@@ -25,7 +25,7 @@ DECOY PASSWORDS (DO NOT PRESENT AS REAL):
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>第6回 — ポートフォリオ最適化: 3 ツールで解く | 経済プログラミング特論I</title>
+<title>第7回 — 最適化総合演習: 3 ツールで解く | 経済プログラミング特論I</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&amp;family=Caveat:wght@400;600;700&amp;family=Noto+Sans+JP:wght@300;400;500&amp;family=Noto+Serif+JP:wght@300;400;500;700&amp;family=JetBrains+Mono:wght@400;600&amp;family=Source+Code+Pro:wght@400;600&amp;display=swap" rel="stylesheet"/>
 <!-- KaTeX: 問題文・選択肢内の $...$ / $$...$$ を数式表示に変換（MATH リポより移植・v3 で導入）
      注意: 通貨表記は \$100 のようにエスケープする。$ 単独は数式扱いになる。
@@ -867,6 +867,11 @@ body {
 [data-theme="light"] .challenge-title { font-family: 'Caveat', cursive; font-weight: 700; font-size: 16px; }
 .challenge-body { font-size: 12.5px; color: var(--text-dim); line-height: 1.9; transition: color 0.4s; }
 .challenge-body strong { color: var(--text); font-weight: 500; }
+.challenge-body code {
+  font-family: 'JetBrains Mono','Source Code Pro',monospace; font-size: 11px;
+  background: var(--blank-bg); color: var(--blank-color);
+  padding: 1px 5px; border-radius: 3px;
+}
 
 /* ── NEXT BUTTON ── */
 .next-btn {
@@ -926,111 +931,6 @@ body {
 }
 [data-theme="light"] .step-locked-gate { border-radius: 1px; }
 
-/* ════ REORDER PUZZLE ════ */
-.rp-list { list-style: none; padding: 0; margin: 0.5rem 0; }
-.rp-item {
-  display: flex; align-items: center; gap: 0.5rem;
-  padding: 0.4rem 0.7rem; margin: 0.25rem 0;
-  border: 1px solid var(--border); border-radius: 4px;
-  background: var(--card-bg2); color: var(--text);
-  font-family: 'JetBrains Mono','Source Code Pro',monospace; font-size: 12px;
-  transition: all 0.15s; cursor: default;
-}
-[data-theme="light"] .rp-item { border-radius: 1px; }
-.rp-handle { cursor: grab; user-select: none; color: var(--text-muted); margin-right: 4px; }
-.rp-item.rp-dragging { opacity: 0.5; border-color: var(--accent); }
-.rp-item.rp-locked {
-  border-color: var(--success) !important;
-  background: rgba(34,197,94,0.06) !important;
-  cursor: default;
-}
-[data-theme="light"] .rp-item.rp-locked {
-  border-color: var(--success) !important;
-  background: rgba(30,102,69,0.06) !important;
-}
-.rp-moveWrap { margin-left: auto; display: flex; gap: 0.3rem; }
-.rp-move {
-  appearance: none; border: 1px solid var(--border);
-  background: var(--card-bg); color: var(--text);
-  padding: 2px 7px; border-radius: 3px; cursor: pointer; font-size: 11px;
-  transition: border-color 0.15s;
-}
-.rp-move:hover { border-color: var(--accent); color: var(--accent); }
-.rp-actions { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; margin-top: 0.6rem; }
-.rp-check, .rp-reset {
-  appearance: none; border: 1px solid var(--border);
-  background: var(--card-bg2); color: var(--text);
-  padding: 6px 16px; border-radius: 3px; cursor: pointer;
-  font-size: 12px; font-weight: 700; transition: all 0.15s;
-}
-[data-theme="dark"] .rp-check { font-family: 'JetBrains Mono', monospace; color: var(--accent); border-color: var(--blank-border); background: var(--blank-bg); }
-[data-theme="dark"] .rp-check:hover { background: rgba(0,212,170,0.2); }
-[data-theme="light"] .rp-check { font-family: 'Caveat', cursive; font-size: 14px; font-weight: 600; background: var(--accent); border: none; color: var(--surface); }
-[data-theme="light"] .rp-check:hover { background: var(--text); }
-.rp-check:disabled { opacity: 0.5; cursor: default; }
-.rp-reset:hover { border-color: var(--warning); color: var(--warning); }
-.rp-status { font-size: 12.5px; font-weight: 700; }
-.rp-item code { background: none !important; border: 0 !important; padding: 0 !important; }
-
-/* ════ BUG HUNTER ════ */
-.bh-pre {
-  border: 1px solid var(--border); border-radius: 4px;
-  padding: 0.7rem 1rem; background: var(--code-bg);
-  overflow: auto; transition: all 0.4s;
-}
-[data-theme="light"] .bh-pre { border-radius: 1px; }
-.bh-code { display: block; white-space: pre;
-  font-family: 'JetBrains Mono','Source Code Pro',monospace;
-  font-size: 12.5px; line-height: 1.9; color: var(--code-text); }
-.bh-line {
-  display: block; cursor: pointer; border-radius: 4px;
-  padding: 0.1rem 0.3rem; transition: background 0.12s;
-}
-.bh-line:hover { background: rgba(255,255,255,0.06); }
-[data-theme="light"] .bh-line:hover { background: rgba(212,201,176,0.3); }
-.bh-lno { display: inline-block; width: 2em; opacity: 0.45; font-size: 11px; }
-.bh-hit { border: 1px solid var(--success) !important; background: rgba(34,197,94,0.10) !important; }
-[data-theme="light"] .bh-hit { border-color: var(--success) !important; background: rgba(30,102,69,0.08) !important; }
-.bh-miss { border: 1px solid var(--error) !important; background: rgba(239,68,68,0.08) !important; animation: shake 0.3s; }
-.bh-locked .bh-line { cursor: default; }
-.bh-actions { display: flex; gap: 0.6rem; align-items: center; margin-top: 0.6rem; }
-.bh-reset {
-  appearance: none; border: 1px solid var(--border);
-  background: var(--card-bg2); color: var(--text);
-  padding: 6px 14px; border-radius: 3px; cursor: pointer;
-  font-size: 12px; font-weight: 700; transition: all 0.15s;
-}
-.bh-reset:hover { border-color: var(--warning); color: var(--warning); }
-.bh-status { font-size: 12.5px; font-weight: 700; }
-
-/* ════ VAR GROW ════ */
-.vg-panel {
-  border: 1px solid var(--border); border-radius: 4px;
-  padding: 0.9rem 1rem; background: var(--card-bg); transition: all 0.4s;
-}
-[data-theme="light"] .vg-panel { border-radius: 1px; }
-.vg-stats { display: flex; gap: 1.2rem; flex-wrap: wrap; align-items: center; margin-bottom: 0.6rem; font-size: 13px; }
-.vg-barwrap { height: 8px; border-radius: 999px; background: var(--code-head-bg); overflow: hidden; margin: 0.4rem 0 0.8rem; }
-.vg-bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--accent3)); transition: width 0.25s; }
-.vg-actions, .vg-actions2 { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; margin-bottom: 0.5rem; }
-.vg-act, .vg-reset-btn {
-  appearance: none; border: 1px solid var(--border);
-  background: var(--card-bg2); color: var(--text);
-  padding: 6px 12px; border-radius: 3px; cursor: pointer;
-  font-size: 12px; font-weight: 700;
-  font-family: 'JetBrains Mono','Source Code Pro',monospace;
-  transition: all 0.15s;
-}
-.vg-act:hover { border-color: var(--accent); color: var(--accent); }
-.vg-act:disabled, .vg-reset-btn:disabled { opacity: 0.5; cursor: default; }
-.vg-reset-btn:hover:not(:disabled) { border-color: var(--warning); color: var(--warning); }
-.vg-status { font-size: 12.5px; font-weight: 700; margin-left: 0.3rem; }
-.vg-logwrap { margin-top: 0.7rem; border-top: 1px dashed var(--border); padding-top: 0.5rem; }
-.vg-log-title { font-size: 11px; color: var(--text-muted); margin-bottom: 0.3rem; font-weight: 700; letter-spacing: 1px; }
-[data-theme="dark"] .vg-log-title { font-family: 'JetBrains Mono', monospace; }
-.vg-log { padding-left: 1.2rem; font-size: 11.5px; color: var(--text-dim); line-height: 1.8; }
-.vg-flash .vg-panel { outline: 2px solid rgba(0,212,170,0.35); outline-offset: 2px; }
-
 /* ════ ATTENDANCE ════ */
 .att-block {
   margin-top: 20px; padding: 14px 18px;
@@ -1088,186 +988,6 @@ body {
 }
 [data-theme="dark"]  .sb-done-mark { font-family: 'JetBrains Mono', monospace; }
 [data-theme="light"] .sb-done-mark { font-size: 13px; }
-
-/* ════════════════════════════════════════
-   ① CODE SPOT
-   ════════════════════════════════════════ */
-.cs-block {
-  border: 1px solid var(--border); border-radius: 4px;
-  background: var(--code-bg); overflow: hidden;
-  margin-bottom: 14px; transition: all 0.4s;
-}
-[data-theme="light"] .cs-block { border-radius: 1px; }
-
-.cs-header {
-  background: var(--code-head-bg); border-bottom: 1px solid var(--border);
-  padding: 8px 16px; display: flex; align-items: center;
-  justify-content: space-between; transition: all 0.4s;
-}
-.cs-header-label {
-  font-size: 10px; color: var(--text-muted);
-  letter-spacing: 1px; text-transform: uppercase;
-}
-[data-theme="dark"]  .cs-header-label { font-family: 'JetBrains Mono', monospace; }
-[data-theme="light"] .cs-header-label { font-family: 'Caveat', cursive; font-size: 12px; letter-spacing: 0; }
-
-.cs-lines { padding: 8px 0; }
-
-.cs-line {
-  display: flex; align-items: center; gap: 10px;
-  padding: 6px 16px; cursor: pointer;
-  font-family: 'JetBrains Mono','Source Code Pro', monospace;
-  font-size: 12.5px; line-height: 1.8; color: var(--code-text);
-  border: 1px solid transparent; margin: 2px 8px; border-radius: 3px;
-  transition: all 0.15s;
-}
-[data-theme="light"] .cs-line { border-radius: 1px; }
-.cs-line:hover:not(.cs-line-locked) { background: rgba(255,255,255,0.05); border-color: var(--border); }
-[data-theme="light"] .cs-line:hover:not(.cs-line-locked) { background: rgba(212,201,176,0.25); }
-
-.cs-lno { width: 1.6em; flex-shrink: 0; font-size: 11px; color: var(--text-muted); opacity: 0.5; }
-
-.cs-line.cs-correct {
-  border-color: var(--success) !important;
-  background: rgba(34,197,94,0.08) !important;
-  color: var(--success) !important;
-}
-[data-theme="light"] .cs-line.cs-correct { background: rgba(30,102,69,0.06) !important; }
-
-.cs-line.cs-wrong {
-  border-color: var(--error) !important;
-  background: rgba(239,68,68,0.07) !important;
-  animation: shake 0.3s;
-}
-.cs-line.cs-line-locked { cursor: default; }
-
-.cs-status { font-size: 12.5px; font-weight: 700; margin-top: 8px; padding: 0 8px 8px; }
-.cs-inst {
-  font-size: 11.5px; color: var(--text-muted); padding: 6px 16px 10px;
-  border-top: 1px dashed var(--border); margin-top: 4px;
-  transition: all 0.4s;
-}
-[data-theme="dark"]  .cs-inst { font-family: 'JetBrains Mono', monospace; letter-spacing: 0.5px; }
-[data-theme="light"] .cs-inst { font-family: 'Caveat', cursive; font-size: 13px; }
-
-/* ════════════════════════════════════════
-   ② OUTPUT PREDICTION
-   ════════════════════════════════════════ */
-.op-card {
-  background: var(--card-bg); border: 1px solid var(--border);
-  border-radius: 4px; margin-bottom: 14px; overflow: hidden;
-  transition: all 0.3s;
-}
-[data-theme="light"] .op-card { border-radius: 1px; }
-.op-card:hover { border-color: var(--border-hover); }
-.op-card.correct { border-color: var(--success) !important; }
-[data-theme="dark"]  .op-card.correct { background: rgba(34,197,94,0.04); }
-[data-theme="light"] .op-card.correct { background: rgba(30,102,69,0.03); }
-.op-card.wrong { border-color: var(--error) !important; animation: shake 0.3s; }
-
-.op-top {
-  background: var(--card-bg2); border-bottom: 1px solid var(--border);
-  padding: 8px 14px; display: flex; align-items: center; gap: 10px;
-  transition: all 0.4s;
-}
-[data-theme="light"] .op-top { border-bottom: 1px dashed var(--border); }
-.op-badge {
-  font-size: 11px; padding: 2px 8px; border-radius: 2px;
-  font-weight: 700; flex-shrink: 0;
-}
-[data-theme="dark"] .op-badge {
-  font-family: 'JetBrains Mono', monospace;
-  color: var(--accent2); background: rgba(255,107,53,0.1);
-}
-[data-theme="light"] .op-badge {
-  font-family: 'Caveat', cursive; font-size: 14px;
-  color: var(--accent2); background: none; padding: 0;
-}
-.op-label { font-size: 12px; color: var(--text-dim); transition: color 0.4s; }
-
-.op-body {
-  padding: 14px 16px;
-  font-family: 'JetBrains Mono','Source Code Pro', monospace;
-  font-size: 12.5px; color: var(--code-text); line-height: 2;
-  transition: all 0.4s;
-}
-.op-prompt {
-  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
-  margin-top: 8px;
-}
-.op-arrow {
-  color: var(--text-muted); font-size: 12px;
-}
-[data-theme="dark"]  .op-arrow { font-family: 'JetBrains Mono', monospace; }
-
-.op-input {
-  background: var(--blank-bg); outline: none;
-  font-family: 'JetBrains Mono','Source Code Pro', monospace;
-  font-size: 13px; transition: all 0.2s; vertical-align: middle;
-  min-width: 80px;
-}
-[data-theme="dark"] .op-input {
-  border: 1px dashed var(--blank-border); color: var(--blank-color);
-  padding: 2px 8px; border-radius: 3px;
-}
-[data-theme="light"] .op-input {
-  border: none; border-bottom: 2px solid var(--accent);
-  background: transparent; color: var(--accent);
-  padding: 0 4px 2px; border-radius: 0;
-  font-family: 'Caveat', cursive; font-size: 15px; vertical-align: bottom;
-}
-.op-input:focus { border-color: var(--text); box-shadow: 0 0 0 2px var(--blank-bg); }
-[data-theme="light"] .op-input:focus { box-shadow: none; border-bottom-color: var(--text); }
-.op-input.correct-input { border-color: var(--success) !important; color: var(--success) !important; }
-.op-input.wrong-input   { border-color: var(--error)   !important; color: var(--error)   !important; }
-
-.op-foot {
-  padding: 8px 14px; border-top: 1px solid var(--border);
-  display: flex; align-items: center; gap: 10px;
-  transition: border-color 0.4s;
-}
-[data-theme="light"] .op-foot { border-top: 1px dashed var(--border); }
-.op-msg { font-size: 12px; margin-left: auto; }
-[data-theme="dark"]  .op-msg { font-family: 'JetBrains Mono', monospace; }
-[data-theme="light"] .op-msg { font-family: 'Caveat', cursive; font-size: 14px; }
-.op-msg.ok { color: var(--success); }
-.op-msg.ng { color: var(--error); }
-
-/* ════ DETAILS / SUMMARY（折りたたみ解説） ════ */
-.explain-details {
-  margin-bottom: 16px;
-}
-.explain-details summary {
-  cursor: pointer;
-  list-style: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 14px;
-  border: 1px solid var(--border);
-  border-radius: 3px;
-  font-size: 12.5px;
-  color: var(--text-muted);
-  background: var(--card-bg2);
-  transition: all 0.2s;
-  user-select: none;
-}
-.explain-details summary::-webkit-details-marker { display: none; }
-.explain-details summary::before {
-  content: '▶';
-  font-size: 9px;
-  transition: transform 0.2s;
-  color: var(--accent);
-}
-.explain-details[open] summary::before { transform: rotate(90deg); }
-.explain-details summary:hover {
-  border-color: var(--accent);
-  color: var(--text);
-}
-[data-theme="light"] .explain-details summary {
-  font-family: 'Caveat', cursive;
-  font-size: 14px;
-}
 
 /* ════════════════════════════════════════
    CELEBRATION POPUP
@@ -1352,11 +1072,11 @@ body {
 <div class="hero">
 <div class="hero-stamp"><div class="hero-stamp-text">ECON<br/>PROG<br/>2026</div></div>
 <div class="hero-inner">
-<div class="hero-tag">LECTURE 04 — ECON PROGRAMMING</div>
-<h1>ポートフォリオ最適化 — 3 ツールで解く<br/><span>経済プログラミング特論I</span></h1>
-<p class="hero-sub">Google ColabでPythonを使い、生産計画問題をコードで解く力を身につける。</p>
+<div class="hero-tag">LECTURE 07 — ECON PROGRAMMING</div>
+<h1>最適化総合演習 — 3 ツールで解く<br/><span>経済プログラミング特論I</span></h1>
+<p class="hero-sub">前半5回の総まとめ。新しい概念はゼロ。食事問題のデモを見て、広告 or シフトから1問を自分で選び、AI・Excel・Python の3ツールで解いて提出する。</p>
 <div class="hero-meta">
-<div class="hero-badge"><span class="hero-badge-dot"></span>第6回 / 経済学部 2・3年生対象</div>
+<div class="hero-badge"><span class="hero-badge-dot"></span>第7回 / 経済学部 2・3年生対象</div>
 <div class="hero-badge"><span class="hero-badge-dot" style="background:var(--accent3)"></span>AI + Excel + Python</div>
 </div>
 <div class="init-row">
@@ -1372,30 +1092,27 @@ body {
 <!-- SIDEBAR -->
 <nav class="sidebar">
 <div class="sb-section">Topics</div>
-<button class="unit-btn active" id="btn-t01" onclick="showStep('t01')"><span class="u-num">1</span><span class="u-name">ポートフォリオ最適化とは</span></button>
-<button class="unit-btn locked" id="btn-t02" onclick="showStep('t02')"><span class="u-num">2</span><span class="u-name">AI で解く</span><span class="lock-icon-sb">🔒</span></button>
-<button class="unit-btn locked" id="btn-t03" onclick="showStep('t03')"><span class="u-num">3</span><span class="u-name">Excel Solver で解く</span><span class="lock-icon-sb">🔒</span></button>
-<button class="unit-btn locked" id="btn-t04" onclick="showStep('t04')"><span class="u-num">4</span><span class="u-name">Python (PuLP) で解く</span><span class="lock-icon-sb">🔒</span></button>
-<button class="unit-btn locked" id="btn-t05" onclick="showStep('t05')"><span class="u-num">5</span><span class="u-name">what-if 分析と前半 5 回まとめ</span><span class="lock-icon-sb">🔒</span></button>
+<button class="unit-btn active" id="btn-t01" onclick="showStep('t01')"><span class="u-num">1</span><span class="u-name">復習＋デモ：食事問題を3ツールで解く</span></button>
+<button class="unit-btn locked" id="btn-t02" onclick="showStep('t02')"><span class="u-num">2</span><span class="u-name">自分の問題を解く：広告 or シフト</span><span class="lock-icon-sb">🔒</span></button>
 </nav>
 <!-- MAIN -->
 <main class="main">
 
-<!-- ═══ Topic 1: ポートフォリオ最適化とは ═══ -->
+<!-- ═══ Topic 1: 復習＋デモ：食事問題を3ツールで解く ═══ -->
 <div class="unit-panel active" id="panel-t01">
 <div class="unit-header">
-<div class="uh-kicker">Topic 1 — 投資配分の問題</div>
-<h2>ポートフォリオ最適化とは</h2>
-<p class="uh-desc">100 万円を 5 資産に配分する問題を、線形最適化として定式化する。為替リスク制約を含む 5 つの制約を整理する。</p>
-<div class="uh-tags"><span class="tag tag-stat">ポートフォリオ</span>
-<span class="tag tag-stat">線形最適化</span>
-<span class="tag tag-stat">約9分</span></div>
+<div class="uh-kicker">Topic 1 — 復習＋デモ</div>
+<h2>食事問題を3ツールで解く</h2>
+<p class="uh-desc">線形最適化を「目的関数・制約条件・決定変数」の3要素で整理する復習から。デモの食事問題（パン・牛乳）を AI・Excel・Python の3ツールで解く流れを確認する。</p>
+<div class="uh-tags"><span class="tag tag-stat">線形最適化</span>
+<span class="tag tag-stat">3ツール</span>
+<span class="tag tag-stat">復習</span></div>
 </div>
 <div class="section">
 <div class="sec-label"><span class="s-num">🎬</span>解説動画</div>
-<a class="colab-card" href="https://youtu.be/Hphk6AnzSNQ" target="_blank">
+<a class="colab-card" data-step="t01" href="https://youtu.be/2YC25ya-Sf8" target="_blank">
 <span class="colab-icon">▶️</span>
-<div><div class="colab-title">【動画】ポートフォリオ最適化とは（掛け合い解説）</div>
+<div><div class="colab-title">【動画】復習＋デモ：食事問題を3ツールで解く（掛け合い解説）</div>
 <div class="colab-desc">先生と学生の会話形式で解説します</div></div>
 <span class="colab-arrow">→ 視聴</span>
 </a>
@@ -1403,83 +1120,62 @@ body {
 <div class="obj-box">
 <div class="obj-title">// この Topic のゴール</div>
 <ul>
-<li>ポートフォリオ最適化の 3 要素（資産・期待リターン・制約）を説明できる</li>
-<li>為替リスクをハード制約として LP に組み込む発想を理解できる</li>
-<li>5 資産 5 制約の問題を定式化できる</li>
+<li>線形最適化を「目的関数・制約条件・決定変数」の3要素で整理できる</li>
+<li>食事問題のデモを AI・Excel・Python の3ツールで解く流れを理解できる</li>
+<li>3ツールの強み（とにかく答え／過程を見せる／繰り返し自動化）を使い分けられる</li>
 </ul>
 </div>
 <div class="section">
-<div class="sec-label"><span class="s-num">①</span>確認クイズ（全5問正解でTopic 2が解放）</div>
+<div class="sec-label"><span class="s-num">①</span>確認クイズ（全3問正解でTopic 2が解放）</div>
 <div class="quiz-card" id="qc-t01-1">
-<div class="quiz-q"><span class="quiz-qnum">Q1</span>ポートフォリオ最適化の 3 要素として正しい組み合わせは？</div>
+<div class="quiz-q"><span class="quiz-qnum">Q1</span>条件を守りながら、何かをできるだけ大きく（または小さく）したい問題のことを何と呼ぶ？</div>
 <div class="quiz-opts">
-<div class="quiz-opt" onclick="checkQuiz(this,true,'exp-t01-1','t01')"><span class="opt-badge">A</span>資産・期待リターン・制約</div>
-<div class="quiz-opt" data-wrong="株価・出来高・配当は市場データですが、最適化の枠組みで扱う 3 要素ではありません。" onclick="checkQuiz(this,false,'exp-t01-1','t01')"><span class="opt-badge">B</span>株価・出来高・配当</div>
-<div class="quiz-opt" data-wrong="金融機関は登場人物ですが、最適化問題の数学的な 3 要素ではありません。" onclick="checkQuiz(this,false,'exp-t01-1','t01')"><span class="opt-badge">C</span>銀行・証券会社・顧客</div>
-<div class="quiz-opt" data-wrong="これらは指数（インデックス）の名前で、最適化の構成要素ではありません。" onclick="checkQuiz(this,false,'exp-t01-1','t01')"><span class="opt-badge">D</span>日経平均・TOPIX・ダウ</div>
+<div class="quiz-opt" data-wrong="シミュレーションは「試しに動かして様子を見る」こと。最大・最小を求める問題の名前ではありません。" onclick="checkQuiz(this,false,'exp-t01-1','t01')"><span class="opt-badge">A</span>シミュレーション</div>
+<div class="quiz-opt" onclick="checkQuiz(this,true,'exp-t01-1','t01')"><span class="opt-badge">B</span>最適化問題</div>
+<div class="quiz-opt" data-wrong="機械学習はデータからパターンを学ぶ技術。今回の授業で扱ったのは最適化問題です。" onclick="checkQuiz(this,false,'exp-t01-1','t01')"><span class="opt-badge">C</span>機械学習</div>
+<div class="quiz-opt" data-wrong="統計分析はデータの傾向を調べること。最大・最小を求める問題の名前ではありません。" onclick="checkQuiz(this,false,'exp-t01-1','t01')"><span class="opt-badge">D</span>統計分析</div>
 </div>
-<div class="quiz-exp" id="exp-t01-1"><strong>正解: A</strong><br/>ポートフォリオ最適化は「どの資産にいくら配分するか」を、資産（種類）・期待リターン（各資産の収益率）・制約（合計・上限・下限）の 3 要素で組み立てます。</div>
+<div class="quiz-exp" id="exp-t01-1"><strong>正解: B</strong><br/>「一番得する／一番安く済む答えを探す」問題が最適化問題です。第3回からずっと扱ってきた、この授業の主役です。</div>
 </div>
 <div class="quiz-card" id="qc-t01-2">
-<div class="quiz-q"><span class="quiz-qnum">Q2</span>ポートフォリオ最適化は数学的にどの種類の問題に分類される？</div>
+<div class="quiz-q"><span class="quiz-qnum">Q2</span>目的関数も制約条件も、すべて1次式（足し算と掛け算だけのシンプルな式）で書ける最適化問題を何と呼ぶ？</div>
 <div class="quiz-opts">
-<div class="quiz-opt" data-wrong="目的関数も制約もすべて 1 次式（一次関数）です。非線形ではありません。" onclick="checkQuiz(this,false,'exp-t01-2','t01')"><span class="opt-badge">A</span>非線形最適化</div>
-<div class="quiz-opt" onclick="checkQuiz(this,true,'exp-t01-2','t01')"><span class="opt-badge">B</span>線形最適化（線形計画問題）</div>
-<div class="quiz-opt" data-wrong="配分額は連続値（1.5 万円など）で良いため、整数制約は付きません。" onclick="checkQuiz(this,false,'exp-t01-2','t01')"><span class="opt-badge">C</span>整数計画問題</div>
-<div class="quiz-opt" data-wrong="時間方向の段階決定がないため、動的計画ではありません。1 時点での配分最適化です。" onclick="checkQuiz(this,false,'exp-t01-2','t01')"><span class="opt-badge">D</span>動的計画問題</div>
+<div class="quiz-opt" data-wrong="「非」が付くと逆の意味。1次式だけで書けるのは「線形」のほうです。" onclick="checkQuiz(this,false,'exp-t01-2','t01')"><span class="opt-badge">A</span>非線形最適化問題</div>
+<div class="quiz-opt" data-wrong="二次方程式は解を求める「方程式」。最適化問題の名前ではありません。" onclick="checkQuiz(this,false,'exp-t01-2','t01')"><span class="opt-badge">B</span>二次方程式</div>
+<div class="quiz-opt" onclick="checkQuiz(this,true,'exp-t01-2','t01')"><span class="opt-badge">C</span>線形最適化問題</div>
+<div class="quiz-opt" data-wrong="整数問題（整数最適化）は「答えを整数に限る」ときの呼び方。式が1次式という意味ではありません。" onclick="checkQuiz(this,false,'exp-t01-2','t01')"><span class="opt-badge">D</span>整数問題</div>
 </div>
-<div class="quiz-exp" id="exp-t01-2"><strong>正解: B</strong><br/>目的関数 $\sum w_i \mu_i$ と制約はすべて 1 次式のため、線形計画問題（LP）に分類されます。Excel の「シンプレックス LP」がそのまま使えます。</div>
+<div class="quiz-exp" id="exp-t01-2"><strong>正解: C</strong><br/>式がぜんぶ1次式（線形）の最適化問題が「線形最適化問題」。食事問題・広告問題・シフト問題はすべてこの仲間です。</div>
 </div>
 <div class="quiz-card" id="qc-t01-3">
-<div class="quiz-q"><span class="quiz-qnum">Q3</span>今回の例題で「外貨建て（米国株 + 新興国株）≤ 50 万円」という制約を入れる経済的な理由は？</div>
+<div class="quiz-q"><span class="quiz-qnum">Q3</span>最適化問題の3要素は「目的関数」「制約条件」と、あと1つは？</div>
 <div class="quiz-opts">
-<div class="quiz-opt" data-wrong="手数料はリターンに織り込めば済む話で、配分上限の理由ではありません。" onclick="checkQuiz(this,false,'exp-t01-3','t01')"><span class="opt-badge">A</span>米国株の方が手数料が高いから</div>
-<div class="quiz-opt" data-wrong="日本株を増やしたいなら日本株の下限を設けます。外貨建ての上限制約は為替リスクを抑える目的です。" onclick="checkQuiz(this,false,'exp-t01-3','t01')"><span class="opt-badge">B</span>日本株を増やしたいから</div>
-<div class="quiz-opt" onclick="checkQuiz(this,true,'exp-t01-3','t01')"><span class="opt-badge">C</span>為替リスクを上限で抑えるため</div>
-<div class="quiz-opt" data-wrong="流動性は別の論点で、新興国株単独の上限（20 万円制約）で対処しています。外貨建て上限は為替リスクが理由です。" onclick="checkQuiz(this,false,'exp-t01-3','t01')"><span class="opt-badge">D</span>新興国株の流動性が低いから</div>
+<div class="quiz-opt" data-wrong="乱数は使いません。3要素の残り1つは「何を決めるか」を表す決定変数です。" onclick="checkQuiz(this,false,'exp-t01-3','t01')"><span class="opt-badge">A</span>乱数</div>
+<div class="quiz-opt" data-wrong="定数は問題に出てくる固定の数値。「何を決めるか」を表すのは決定変数です。" onclick="checkQuiz(this,false,'exp-t01-3','t01')"><span class="opt-badge">B</span>定数</div>
+<div class="quiz-opt" data-wrong="グラフは見せ方の1つ。3要素の残り1つは決定変数です。" onclick="checkQuiz(this,false,'exp-t01-3','t01')"><span class="opt-badge">C</span>グラフ</div>
+<div class="quiz-opt" onclick="checkQuiz(this,true,'exp-t01-3','t01')"><span class="opt-badge">D</span>決定変数</div>
 </div>
-<div class="quiz-exp" id="exp-t01-3"><strong>正解: C</strong><br/>外貨建て資産は為替変動で円換算価値が大きく動きます。為替リスクを「外貨建て総額の上限」というハード制約で抑えるのが今回の設計です。</div>
+<div class="quiz-exp" id="exp-t01-3"><strong>正解: D</strong><br/>「何を決めるか（決定変数）」「何を最大／最小にするか（目的関数）」「守る条件（制約条件）」。この3つを書き出すのが最適化の基本の手順です。</div>
 </div>
-<div class="quiz-card" id="qc-t01-4">
-<div class="quiz-q"><span class="quiz-qnum">Q4</span>この問題の決定変数は何個？</div>
-<div class="quiz-opts">
-<div class="quiz-opt" data-wrong="3 個では資産数が足りません。今回は 5 資産すべてに配分額を決めます。" onclick="checkQuiz(this,false,'exp-t01-4','t01')"><span class="opt-badge">A</span>3 個</div>
-<div class="quiz-opt" data-wrong="資産数の倍にする必要はありません。今回は 5 資産 = 5 変数です。" onclick="checkQuiz(this,false,'exp-t01-4','t01')"><span class="opt-badge">B</span>10 個</div>
-<div class="quiz-opt" data-wrong="L5 輸送問題は 6 個（2×3）でしたが、今回は 5 資産 1 次元なので 5 個です。" onclick="checkQuiz(this,false,'exp-t01-4','t01')"><span class="opt-badge">C</span>6 個</div>
-<div class="quiz-opt" onclick="checkQuiz(this,true,'exp-t01-4','t01')"><span class="opt-badge">D</span>5 個</div>
-</div>
-<div class="quiz-exp" id="exp-t01-4"><strong>正解: D</strong><br/>日本株・米国株・新興国株・国内債券・現金の 5 資産それぞれの配分額が決定変数なので、合計 5 個です。L5 輸送問題（2 工場×3 倉庫=6 変数）よりシンプルな構造です。</div>
-</div>
-<div class="quiz-card" id="qc-t01-5">
-<div class="quiz-q"><span class="quiz-qnum">Q5</span>今回の例題で「合計 = 100 万円」という制約は数学的にどう書く？</div>
-<div class="quiz-opts">
-<div class="quiz-opt" onclick="checkQuiz(this,true,'exp-t01-5','t01')"><span class="opt-badge">A</span>$\sum_{i=1}^{5} w_i = 100$</div>
-<div class="quiz-opt" data-wrong="$\leq$（以下）だと余りが出る可能性があります。今回は「ぴったり全額を使う」ので等号 $=$ を使います。" onclick="checkQuiz(this,false,'exp-t01-5','t01')"><span class="opt-badge">B</span>$\sum_{i=1}^{5} w_i \leq 100$</div>
-<div class="quiz-opt" data-wrong="$\geq$（以上）だと予算超過が可能になります。100 万円が上限なので不適切です。" onclick="checkQuiz(this,false,'exp-t01-5','t01')"><span class="opt-badge">C</span>$\sum_{i=1}^{5} w_i \geq 100$</div>
-<div class="quiz-opt" data-wrong="$w_1, w_2$ だけだと 5 資産のうち 2 つしか合計に含まれません。全 5 資産の合計を 100 にする必要があります。" onclick="checkQuiz(this,false,'exp-t01-5','t01')"><span class="opt-badge">D</span>$w_1 + w_2 = 100$</div>
-</div>
-<div class="quiz-exp" id="exp-t01-5"><strong>正解: A</strong><br/>5 資産の配分額をすべて足して **ちょうど 100 万円**になるよう、等号 $=$ で制約します。式は $\sum_{i=1}^{5} w_i = 100$ です。</div>
-</div>
-<div class="step-locked-gate" id="gate-t01">🔒 5問すべて正解すると次が解放されます。</div>
+<div class="step-locked-gate" id="gate-t01">🔒 3問すべて正解すると次が解放されます。</div>
 </div>
 </div>
 
-<!-- ═══ Topic 2: AI にポートフォリオ最適化を解かせる ═══ -->
+<!-- ═══ Topic 2: 自分の問題を解く：広告 or シフト＋3ツール比較 ═══ -->
 <div class="unit-panel" id="panel-t02">
 <div class="unit-header">
-<div class="uh-kicker">Topic 2 — AI で解く</div>
-<h2>AI にポートフォリオ最適化を解かせる</h2>
-<p class="uh-desc">Markdown 表で AI に問題を伝え、配分・期待リターンを検算する。ハルシネーション対策の 3 点チェック。</p>
-<div class="uh-tags"><span class="tag tag-stat">AI</span>
-<span class="tag tag-stat">Markdown</span>
-<span class="tag tag-stat">検算</span>
-<span class="tag tag-stat">約12分</span></div>
+<div class="uh-kicker">Topic 2 — 自分の問題を解く</div>
+<h2>広告 or シフト ＋ 3ツール比較</h2>
+<p class="uh-desc">広告・集客（来店客数の最大化）かシフト・人員配置（人件費の最小化）から1問を選び、AI で解いて Excel か Python で検算する。3ツールの強み・弱みを自分の手で比較する。</p>
+<div class="uh-tags"><span class="tag tag-stat">最大化</span>
+<span class="tag tag-stat">最小化</span>
+<span class="tag tag-stat">検算</span></div>
 </div>
 <div class="section">
 <div class="sec-label"><span class="s-num">🎬</span>解説動画</div>
-<a class="colab-card" href="https://youtu.be/RdsFtA1sZ24" target="_blank">
+<a class="colab-card" data-step="t02" href="https://youtu.be/tt5b71Yhbjc" target="_blank">
 <span class="colab-icon">▶️</span>
-<div><div class="colab-title">【動画】AI で解く（掛け合い解説）</div>
+<div><div class="colab-title">【動画】自分の問題を解く：広告 or シフト＋3ツール比較（掛け合い解説）</div>
 <div class="colab-desc">先生と学生の会話形式で解説します</div></div>
 <span class="colab-arrow">→ 視聴</span>
 </a>
@@ -1487,323 +1183,66 @@ body {
 <div class="obj-box">
 <div class="obj-title">// この Topic のゴール</div>
 <ul>
-<li>Markdown 表で 5 資産の情報を AI に正しく伝えられる</li>
-<li>AI 回答を検算する 3 観点（合計 100 万円・制約遵守・期待リターン）を実施できる</li>
-<li>AI が制約を見落とすパターンを認識できる</li>
+<li>広告（最大化）とシフト（最小化）で目的の向きが違うことを理解できる</li>
+<li>Python(PuLP) で最大化・最小化を切り替えられる</li>
+<li>AI の答えを Excel か Python で検算する理由（ハルシネーション対策）を説明できる</li>
 </ul>
 </div>
 <div class="section">
-<div class="sec-label"><span class="s-num">①</span>確認クイズ（全5問正解でTopic 3が解放）</div>
+<div class="sec-label"><span class="s-num">①</span>確認クイズ（全3問正解で出席レスポン番号が解放）</div>
 <div class="quiz-card" id="qc-t02-1">
-<div class="quiz-q"><span class="quiz-qnum">Q1</span>AI に問題を伝えるとき、5 資産の情報を最も正確に渡せる形式は？</div>
+<div class="quiz-q"><span class="quiz-qnum">Q1</span>「来店客数をできるだけ増やしたい」— この目的の向きは？</div>
 <div class="quiz-opts">
-<div class="quiz-opt" data-wrong="箇条書きでも伝わりますが、表の方が AI は構造を読み取りやすく、ミスが減ります。" onclick="checkQuiz(this,false,'exp-t02-1','t02')"><span class="opt-badge">A</span>長い箇条書きで全部書く</div>
-<div class="quiz-opt" onclick="checkQuiz(this,true,'exp-t02-1','t02')"><span class="opt-badge">B</span>Markdown 表（資産名・期待リターン・制約を列で整理）</div>
-<div class="quiz-opt" data-wrong="画像認識は精度が落ちることがあり、数値の読み取りミスが起きやすいです。テキスト表が安全です。" onclick="checkQuiz(this,false,'exp-t02-1','t02')"><span class="opt-badge">C</span>画像で渡す</div>
-<div class="quiz-opt" data-wrong="音声入力は誤認識リスクがあり、数値精度が必要な問題には向きません。" onclick="checkQuiz(this,false,'exp-t02-1','t02')"><span class="opt-badge">D</span>口頭で伝える（音声入力）</div>
+<div class="quiz-opt" onclick="checkQuiz(this,true,'exp-t02-1','t02')"><span class="opt-badge">A</span>最大化</div>
+<div class="quiz-opt" data-wrong="増やしたいので最小化ではありません。「できるだけ大きく」は最大化です。" onclick="checkQuiz(this,false,'exp-t02-1','t02')"><span class="opt-badge">B</span>最小化</div>
+<div class="quiz-opt" data-wrong="平均化という目的の向きはありません。「できるだけ大きく」は最大化です。" onclick="checkQuiz(this,false,'exp-t02-1','t02')"><span class="opt-badge">C</span>平均化</div>
+<div class="quiz-opt" data-wrong="固定では何も決められません。「できるだけ大きく」は最大化です。" onclick="checkQuiz(this,false,'exp-t02-1','t02')"><span class="opt-badge">D</span>固定</div>
 </div>
-<div class="quiz-exp" id="exp-t02-1"><strong>正解: B</strong><br/>Markdown 表は AI にとって「列の意味」が明確で、5 資産の情報を構造的に渡せます。学生が動画で写経しやすい点でも推奨です。</div>
+<div class="quiz-exp" id="exp-t02-1"><strong>正解: A</strong><br/>「できるだけ大きく」＝最大化。広告問題は来店客数の最大化でした。逆に「できるだけ小さく」は最小化です。</div>
 </div>
 <div class="quiz-card" id="qc-t02-2">
-<div class="quiz-q"><span class="quiz-qnum">Q2</span>AI が出した配分案を信用する前に、必ずすべき検算は？</div>
+<div class="quiz-q"><span class="quiz-qnum">Q2</span>「人件費をできるだけ抑えたい」— この目的の向きは？</div>
 <div class="quiz-opts">
-<div class="quiz-opt" data-wrong="偶数である必要はありません（配分は連続値）。合計や制約の遵守が重要です。" onclick="checkQuiz(this,false,'exp-t02-2','t02')"><span class="opt-badge">A</span>配分が偶数になっているか</div>
-<div class="quiz-opt" data-wrong="AI は「正しい」と答えがちです。自分で数値を確かめないと検算になりません。" onclick="checkQuiz(this,false,'exp-t02-2','t02')"><span class="opt-badge">B</span>AI に「正しいですか？」と聞く</div>
-<div class="quiz-opt" onclick="checkQuiz(this,true,'exp-t02-2','t02')"><span class="opt-badge">C</span>配分の合計が 100 万円になっているか</div>
-<div class="quiz-opt" data-wrong="AI は数値計算でミスをすることがあります。必ず合計・制約・期待リターンを自分で確認してください。" onclick="checkQuiz(this,false,'exp-t02-2','t02')"><span class="opt-badge">D</span>何もしない（AI は正確だから）</div>
+<div class="quiz-opt" data-wrong="費用を最大化したら大損です。「できるだけ抑える」は最小化です。" onclick="checkQuiz(this,false,'exp-t02-2','t02')"><span class="opt-badge">A</span>最大化</div>
+<div class="quiz-opt" onclick="checkQuiz(this,true,'exp-t02-2','t02')"><span class="opt-badge">B</span>最小化</div>
+<div class="quiz-opt" data-wrong="そのような目的の向きはありません。「できるだけ抑える」は最小化です。" onclick="checkQuiz(this,false,'exp-t02-2','t02')"><span class="opt-badge">C</span>二倍化</div>
+<div class="quiz-opt" data-wrong="目的を無視しては問題が解けません。「できるだけ抑える」は最小化です。" onclick="checkQuiz(this,false,'exp-t02-2','t02')"><span class="opt-badge">D</span>無視</div>
 </div>
-<div class="quiz-exp" id="exp-t02-2"><strong>正解: C</strong><br/>最低限「合計 = 100 万円」「各制約を満たすか」「期待リターン $\sum w_i \mu_i$ が正しいか」の 3 点を必ず手計算で検算します。</div>
+<div class="quiz-exp" id="exp-t02-2"><strong>正解: B</strong><br/>「できるだけ抑える（小さく）」＝最小化。シフト問題は人件費の最小化、食事問題も費用の最小化でした。</div>
 </div>
 <div class="quiz-card" id="qc-t02-3">
-<div class="quiz-q"><span class="quiz-qnum">Q3</span>AI 回答でよくあるハルシネーション（誤回答）のパターンは？</div>
+<div class="quiz-q"><span class="quiz-qnum">Q3</span>AI が出した答えを、Excel や Python でもう一度計算して確かめる作業を何という？</div>
 <div class="quiz-opts">
-<div class="quiz-opt" data-wrong="四捨五入は誤回答ではなく、表示上の丸めです。最適化結果の見栄えとして許容範囲です。" onclick="checkQuiz(this,false,'exp-t02-3','t02')"><span class="opt-badge">A</span>小数点以下を四捨五入する</div>
-<div class="quiz-opt" data-wrong="配分を 0 にすると合計が 100 万円にならず、明らかに変なのですぐ気づきます。むしろ巧妙な制約無視の方が見抜きにくいです。" onclick="checkQuiz(this,false,'exp-t02-3','t02')"><span class="opt-badge">B</span>配分を全部 0 にする</div>
-<div class="quiz-opt" data-wrong="同じ答えを返すのはハルシネーションではなく、決定的な挙動です。" onclick="checkQuiz(this,false,'exp-t02-3','t02')"><span class="opt-badge">C</span>同じ答えを 2 回返す</div>
-<div class="quiz-opt" onclick="checkQuiz(this,true,'exp-t02-3','t02')"><span class="opt-badge">D</span>制約を 1 つ無視して、その分リターンを高く見せる</div>
+<div class="quiz-opt" data-wrong="頭の中で計算するのが暗算。別の道具で確かめ直す作業は検算です。" onclick="checkQuiz(this,false,'exp-t02-3','t02')"><span class="opt-badge">A</span>暗算</div>
+<div class="quiz-opt" data-wrong="答えから逆向きに計算するのが逆算。別の道具で確かめ直す作業は検算です。" onclick="checkQuiz(this,false,'exp-t02-3','t02')"><span class="opt-badge">B</span>逆算</div>
+<div class="quiz-opt" onclick="checkQuiz(this,true,'exp-t02-3','t02')"><span class="opt-badge">C</span>検算</div>
+<div class="quiz-opt" data-wrong="単位を変換するのが換算。別の道具で確かめ直す作業は検算です。" onclick="checkQuiz(this,false,'exp-t02-3','t02')"><span class="opt-badge">D</span>換算</div>
 </div>
-<div class="quiz-exp" id="exp-t02-3"><strong>正解: D</strong><br/>AI が「外貨建て ≤ 50 万円」のような制約を無視して、米国株を 60 万円に振り、見かけ上のリターンを大きく見せることがあります。**全制約の遵守を 1 つずつ確認**するのが対策です。</div>
+<div class="quiz-exp" id="exp-t02-3"><strong>正解: C</strong><br/>AI は自信満々のまま間違えることがある（ハルシネーション）ので、Excel や Python で検算して確かめるのが今回の授業の大事な習慣です。</div>
 </div>
-<div class="quiz-card" id="qc-t02-4">
-<div class="quiz-q"><span class="quiz-qnum">Q4</span>期待リターンを検算する数式として正しいのは？</div>
-<div class="quiz-opts">
-<div class="quiz-opt" onclick="checkQuiz(this,true,'exp-t02-4','t02')"><span class="opt-badge">A</span>$\sum_{i=1}^{5} w_i \cdot \mu_i$（配分額と各資産リターン率の積和）</div>
-<div class="quiz-opt" data-wrong="足し算ではなく、各資産ごとに「配分額 × リターン率」を計算してから合計します。" onclick="checkQuiz(this,false,'exp-t02-4','t02')"><span class="opt-badge">B</span>$\sum w_i + \sum \mu_i$（配分額と期待リターンの単純合計）</div>
-<div class="quiz-opt" data-wrong="最大リターン資産だけだと制約を満たせません。配分の加重平均がポートフォリオの期待リターンです。" onclick="checkQuiz(this,false,'exp-t02-4','t02')"><span class="opt-badge">C</span>$\max(\mu_i)$（最大リターンの資産だけ採用）</div>
-<div class="quiz-opt" data-wrong="比を取っても意味のある指標になりません。各資産の貢献を積和で集計します。" onclick="checkQuiz(this,false,'exp-t02-4','t02')"><span class="opt-badge">D</span>$\dfrac{\sum w_i}{\sum \mu_i}$（配分合計 ÷ リターン合計）</div>
+<div class="step-locked-gate" id="gate-t02">🔒 3問すべて正解すると出席レスポン番号が解放されます。</div>
 </div>
-<div class="quiz-exp" id="exp-t02-4"><strong>正解: A</strong><br/>ポートフォリオ全体の期待リターンは $\sum_{i=1}^{5} w_i \mu_i$ で計算します。配分額（万円）× リターン率（%）を全資産で合計します。Excel では SUMPRODUCT 1 セルで書けます。</div>
+
+<!-- 小課題（提出のしかた） -->
+<div class="section" style="margin-top:32px;">
+<div class="sec-label"><span class="s-num">📝</span>第7回 小課題（提出のしかた）</div>
+<div class="challenge-card">
+<div class="challenge-title">📝 提出物は「どちらか1つ」</div>
+<div class="challenge-body">
+T1・T2 で進めてきた作業が、そのまま提出物になります。広告 or シフトから選んだ1問を解いたファイルを <strong>1つ</strong> 提出してください。<br/><br/>
+・<strong>Python で解いた人</strong>：<code>lecture07_optimize.ipynb</code>（Colab のノートブック）<br/>
+・<strong>Excel で解いた人</strong>：<code>lecture07_optimize.xlsx</code>（Solver で解いた Excel）<br/><br/>
+中身は「選んだ問題の最適解 ＋ AI の答えとの検算 ＋ 3ツール比較の考察」。提出先は <strong>Manaba の第7回 小課題</strong>、締切も Manaba で確認してください。
 </div>
-<div class="quiz-card" id="qc-t02-5">
-<div class="quiz-q"><span class="quiz-qnum">Q5</span>AI に問題を投げる前に、必ず明示すべき情報として最も重要なのは？</div>
-<div class="quiz-opts">
-<div class="quiz-opt" data-wrong="個人情報は最適化結果と無関係です。問題の構造を伝えるべきです。" onclick="checkQuiz(this,false,'exp-t02-5','t02')"><span class="opt-badge">A</span>自分の年齢と職業</div>
-<div class="quiz-opt" onclick="checkQuiz(this,true,'exp-t02-5','t02')"><span class="opt-badge">B</span>最大化する量（目的関数）と全制約</div>
-<div class="quiz-opt" data-wrong="バージョン番号は AI 自身が知っています。問題情報を渡すのが優先です。" onclick="checkQuiz(this,false,'exp-t02-5','t02')"><span class="opt-badge">C</span>使う AI のバージョン番号</div>
-<div class="quiz-opt" data-wrong="小規模 LP は一瞬で解けるため、計算時間の指定は不要です。" onclick="checkQuiz(this,false,'exp-t02-5','t02')"><span class="opt-badge">D</span>希望する計算時間</div>
-</div>
-<div class="quiz-exp" id="exp-t02-5"><strong>正解: B</strong><br/>「何を最大化（または最小化）したいか」と「すべての制約」を明確に渡さないと、AI は別の問題を解いてしまいます。Markdown 表 + 目的関数の文章説明の組み合わせが最強です。</div>
-</div>
-<div class="step-locked-gate" id="gate-t02">🔒 5問すべて正解すると次が解放されます。</div>
 </div>
 </div>
 
-<!-- ═══ Topic 3: Excel で目的関数と制約を組む ═══ -->
-<div class="unit-panel" id="panel-t03">
-<div class="unit-header">
-<div class="uh-kicker">Topic 3 — Excel Solver で解く</div>
-<h2>Excel で目的関数と制約を組む</h2>
-<p class="uh-desc">SUMPRODUCT で期待リターンを 1 セルに、Solver で 5 制約を設定、シンプレックス LP で最大化を解く。</p>
-<div class="uh-tags"><span class="tag tag-stat">Excel</span>
-<span class="tag tag-stat">SUMPRODUCT</span>
-<span class="tag tag-stat">Solver</span>
-<span class="tag tag-stat">約14分</span></div>
-</div>
-<div class="section">
-<div class="sec-label"><span class="s-num">🎬</span>解説動画</div>
-<a class="colab-card" href="https://youtu.be/CafUZ-7RvhE" target="_blank">
-<span class="colab-icon">▶️</span>
-<div><div class="colab-title">【動画】Excel Solver で解く（掛け合い解説）</div>
-<div class="colab-desc">先生と学生の会話形式で解説します</div></div>
-<span class="colab-arrow">→ 視聴</span>
-</a>
-</div>
-<div class="obj-box">
-<div class="obj-title">// この Topic のゴール</div>
-<ul>
-<li>SUMPRODUCT でリターン×配分の積和を 1 セルで計算できる</li>
-<li>Solver の目的セル・変数セル・5 つの制約を設定できる</li>
-<li>「最大化」と「シンプレックス LP」を選べる</li>
-</ul>
-</div>
-<div class="section">
-<div class="sec-label"><span class="s-num">①</span>確認クイズ（全5問正解でTopic 4が解放）</div>
-<div class="quiz-card" id="qc-t03-1">
-<div class="quiz-q"><span class="quiz-qnum">Q1</span>5 資産の期待リターンを 1 セルで計算する Excel 関数は？</div>
-<div class="quiz-opts">
-<div class="quiz-opt" data-wrong="SUM は単純合計です。各資産で「配分額 × リターン率」を掛けてから合計したいので不十分です。" onclick="checkQuiz(this,false,'exp-t03-1','t03')"><span class="opt-badge">A</span>SUM</div>
-<div class="quiz-opt" data-wrong="平均ではなく加重和が必要です。AVERAGE は配分額を考慮しません。" onclick="checkQuiz(this,false,'exp-t03-1','t03')"><span class="opt-badge">B</span>AVERAGE</div>
-<div class="quiz-opt" onclick="checkQuiz(this,true,'exp-t03-1','t03')"><span class="opt-badge">C</span>SUMPRODUCT</div>
-<div class="quiz-opt" data-wrong="COUNTIF は条件カウント用で、数値計算には使いません。" onclick="checkQuiz(this,false,'exp-t03-1','t03')"><span class="opt-badge">D</span>COUNTIF</div>
-</div>
-<div class="quiz-exp" id="exp-t03-1"><strong>正解: C</strong><br/>SUMPRODUCT は「配分額の範囲」と「リターン率の範囲」を渡すと、各行で掛け算してから合計する関数です。$\sum w_i \mu_i$ を 1 セルで書けます。</div>
-</div>
-<div class="quiz-card" id="qc-t03-2">
-<div class="quiz-q"><span class="quiz-qnum">Q2</span>Excel Solver で「目的セル」に指定するのは？</div>
-<div class="quiz-opts">
-<div class="quiz-opt" data-wrong="配分額のセルは「変数セル」として別途指定します。目的セルは最大化したい量のセルです。" onclick="checkQuiz(this,false,'exp-t03-2','t03')"><span class="opt-badge">A</span>配分額を入れる 5 つのセル</div>
-<div class="quiz-opt" data-wrong="資産名はラベルで、最適化対象ではありません。目的セルは数値の入った計算式セルです。" onclick="checkQuiz(this,false,'exp-t03-2','t03')"><span class="opt-badge">B</span>資産名を書いたセル</div>
-<div class="quiz-opt" data-wrong="制約は「制約条件」の項目で別途指定します。目的セルとは別です。" onclick="checkQuiz(this,false,'exp-t03-2','t03')"><span class="opt-badge">C</span>制約条件を書いたセル</div>
-<div class="quiz-opt" onclick="checkQuiz(this,true,'exp-t03-2','t03')"><span class="opt-badge">D</span>期待リターンを計算したセル（SUMPRODUCT の結果）</div>
-</div>
-<div class="quiz-exp" id="exp-t03-2"><strong>正解: D</strong><br/>目的セルは「最大化（または最小化）したい量を計算したセル」を指定します。今回は期待リターン $\sum w_i \mu_i$ を計算した SUMPRODUCT セルです。</div>
-</div>
-<div class="quiz-card" id="qc-t03-3">
-<div class="quiz-q"><span class="quiz-qnum">Q3</span>今回の問題は最大化なので、Solver の「目標」設定は？</div>
-<div class="quiz-opts">
-<div class="quiz-opt" onclick="checkQuiz(this,true,'exp-t03-3','t03')"><span class="opt-badge">A</span>最大値</div>
-<div class="quiz-opt" data-wrong="最小値だと配分を 0 にしてリターン 0 が最適解になり、意味がありません。" onclick="checkQuiz(this,false,'exp-t03-3','t03')"><span class="opt-badge">B</span>最小値</div>
-<div class="quiz-opt" data-wrong="指定値は「目的セルを特定の値にする」用途で、最適化ではありません。" onclick="checkQuiz(this,false,'exp-t03-3','t03')"><span class="opt-badge">C</span>指定値</div>
-<div class="quiz-opt" data-wrong="そのような選択肢はありません。「目標」は最大化・最小化・指定値の 3 択です。" onclick="checkQuiz(this,false,'exp-t03-3','t03')"><span class="opt-badge">D</span>差を最小化</div>
-</div>
-<div class="quiz-exp" id="exp-t03-3"><strong>正解: A</strong><br/>期待リターンを「**最大化**」したいので「最大値」を選びます。L5 輸送問題（コスト最小化）とは反対の選択になることに注意。</div>
-</div>
-<div class="quiz-card" id="qc-t03-4">
-<div class="quiz-q"><span class="quiz-qnum">Q4</span>今回の問題は線形最適化なので、解法は？</div>
-<div class="quiz-opts">
-<div class="quiz-opt" data-wrong="解法によって速度や精度が変わります。線形問題には必ず「シンプレックス LP」を選びます。" onclick="checkQuiz(this,false,'exp-t03-4','t03')"><span class="opt-badge">A</span>何を選んでも結果は同じ</div>
-<div class="quiz-opt" onclick="checkQuiz(this,true,'exp-t03-4','t03')"><span class="opt-badge">B</span>シンプレックス LP</div>
-<div class="quiz-opt" data-wrong="進化的アルゴリズムは非線形・離散最適化向けで、線形問題には不要です。" onclick="checkQuiz(this,false,'exp-t03-4','t03')"><span class="opt-badge">C</span>エボリューショナリー</div>
-<div class="quiz-opt" data-wrong="GRG 非線形は非線形問題用で、線形 LP には過剰です。シンプレックス LP の方が高速・正確です。" onclick="checkQuiz(this,false,'exp-t03-4','t03')"><span class="opt-badge">D</span>GRG 非線形</div>
-</div>
-<div class="quiz-exp" id="exp-t03-4"><strong>正解: B</strong><br/>目的関数も制約も 1 次式（線形）なので、専用の高速ソルバー「シンプレックス LP」を選びます。GRG 非線形だと無駄に重く、不安定です。</div>
-</div>
-<div class="quiz-card" id="qc-t03-5">
-<div class="quiz-q"><span class="quiz-qnum">Q5</span>「制約条件の追加」で「合計 = 100 万円」を入れる方法として正しいのは？</div>
-<div class="quiz-opts">
-<div class="quiz-opt" data-wrong="個別に = 100 すると 5 資産すべて 100 万円になり、明らかに不正です。" onclick="checkQuiz(this,false,'exp-t03-5','t03')"><span class="opt-badge">A</span>配分セル 1 個 = 100 を 5 回追加</div>
-<div class="quiz-opt" data-wrong="Solver では SUM などの計算セルを使った制約が書けます。今回の基本制約の 1 つです。" onclick="checkQuiz(this,false,'exp-t03-5','t03')"><span class="opt-badge">B</span>Solver では合計制約は書けない</div>
-<div class="quiz-opt" onclick="checkQuiz(this,true,'exp-t03-5','t03')"><span class="opt-badge">C</span>配分セル範囲の SUM を計算するセルを作り、それが 100 と等しい制約を追加</div>
-<div class="quiz-opt" data-wrong="$\leq$ だと余りが出てしまいます。「全額使う」という意図には等号 $=$ が必要です。" onclick="checkQuiz(this,false,'exp-t03-5','t03')"><span class="opt-badge">D</span>不等号 $\leq$ で 100 にすればよい</div>
-</div>
-<div class="quiz-exp" id="exp-t03-5"><strong>正解: C</strong><br/>配分セルの合計を SUM で別セルに出し、「そのセル = 100」を制約として追加します。等号制約は Solver の左辺・右辺・関係（=）で明示します。</div>
-</div>
-<div class="step-locked-gate" id="gate-t03">🔒 5問すべて正解すると次が解放されます。</div>
-</div>
-</div>
-
-<!-- ═══ Topic 4: PuLP で 5 資産配分を最大化 ═══ -->
-<div class="unit-panel" id="panel-t04">
-<div class="unit-header">
-<div class="uh-kicker">Topic 4 — Python (PuLP) で解く</div>
-<h2>PuLP で 5 資産配分を最大化</h2>
-<p class="uh-desc">LpVariable.dicts と lpSum で目的関数と 5 制約を書く。CBC ソルバーで最適化、Excel 結果との一致確認。</p>
-<div class="uh-tags"><span class="tag tag-stat">Python</span>
-<span class="tag tag-stat">PuLP</span>
-<span class="tag tag-stat">CBC</span>
-<span class="tag tag-stat">約15分</span></div>
-</div>
-<div class="section">
-<div class="sec-label"><span class="s-num">🎬</span>解説動画</div>
-<a class="colab-card" href="https://youtu.be/BTyB1kAMOrI" target="_blank">
-<span class="colab-icon">▶️</span>
-<div><div class="colab-title">【動画】Python (PuLP) で解く（掛け合い解説）</div>
-<div class="colab-desc">先生と学生の会話形式で解説します</div></div>
-<span class="colab-arrow">→ 視聴</span>
-</a>
-</div>
-<div class="obj-box">
-<div class="obj-title">// この Topic のゴール</div>
-<ul>
-<li>LpVariable.dicts で 5 個の変数を一気に作れる</li>
-<li>lpSum で目的関数（最大化）と制約（≤ / ≥ / =）を書ける</li>
-<li>Excel の解と Python の解が一致することを検算できる</li>
-</ul>
-</div>
-<div class="section">
-<div class="sec-label"><span class="s-num">①</span>確認クイズ（全5問正解でTopic 5が解放）</div>
-<div class="quiz-card" id="qc-t04-1">
-<div class="quiz-q"><span class="quiz-qnum">Q1</span>PuLP で 5 資産の決定変数を 1 行で作るコードは？</div>
-<div class="quiz-opts">
-<div class="quiz-opt" data-wrong="numpy 配列も PuLP の変数にはなりません。Solver 用の変数宣言が必要です。" onclick="checkQuiz(this,false,'exp-t04-1','t04')"><span class="opt-badge">A</span>w = np.zeros(5)</div>
-<div class="quiz-opt" data-wrong="通常の Python リストは Solver の変数として認識されません。LpVariable で宣言が必要です。" onclick="checkQuiz(this,false,'exp-t04-1','t04')"><span class="opt-badge">B</span>w = [0, 0, 0, 0, 0]</div>
-<div class="quiz-opt" data-wrong="これは 1 変数だけの宣言です。5 資産分一気に作るには .dicts を使います。" onclick="checkQuiz(this,false,'exp-t04-1','t04')"><span class="opt-badge">C</span>w = pulp.LpVariable("w")</div>
-<div class="quiz-opt" onclick="checkQuiz(this,true,'exp-t04-1','t04')"><span class="opt-badge">D</span>w = pulp.LpVariable.dicts("w", assets, lowBound=0)</div>
-</div>
-<div class="quiz-exp" id="exp-t04-1"><strong>正解: D</strong><br/>LpVariable.dicts は辞書として複数変数を一気に作る便利関数です。lowBound=0 で「空売り不可（$w_i \geq 0$）」も同時に指定できます。</div>
-</div>
-<div class="quiz-card" id="qc-t04-2">
-<div class="quiz-q"><span class="quiz-qnum">Q2</span>目的関数「期待リターン最大化」を PuLP で書くと？</div>
-<div class="quiz-opts">
-<div class="quiz-opt" onclick="checkQuiz(this,true,'exp-t04-2','t04')"><span class="opt-badge">A</span>problem += pulp.lpSum(w[i] * mu[i] for i in assets)</div>
-<div class="quiz-opt" data-wrong="単純合計ではなく、各資産で「変数 × リターン」を掛けてから合計します。" onclick="checkQuiz(this,false,'exp-t04-2','t04')"><span class="opt-badge">B</span>problem += sum(w) + sum(mu)</div>
-<div class="quiz-opt" data-wrong="最大リターン資産だけ採用は最適解ではありません。LP では目的関数を式で書きます。" onclick="checkQuiz(this,false,'exp-t04-2','t04')"><span class="opt-badge">C</span>problem += max(mu)</div>
-<div class="quiz-opt" data-wrong="リターン率だけ合計しても意味がありません。配分額 $w_i$ で重み付けが必要です。" onclick="checkQuiz(this,false,'exp-t04-2','t04')"><span class="opt-badge">D</span>problem += pulp.lpSum(mu)</div>
-</div>
-<div class="quiz-exp" id="exp-t04-2"><strong>正解: A</strong><br/>lpSum と for 句を組み合わせて $\sum w_i \mu_i$ を表現します。問題に += で代入することで「目的関数として登録」されます。今回は最大化なので LpMaximize を指定して問題を作ります。</div>
-</div>
-<div class="quiz-card" id="qc-t04-3">
-<div class="quiz-q"><span class="quiz-qnum">Q3</span>PuLP の標準ソルバー（外部インストール不要で使える）は？</div>
-<div class="quiz-opts">
-<div class="quiz-opt" data-wrong="Gurobi も商用で別途ライセンスが必要です。学術ライセンスはありますが標準ではありません。" onclick="checkQuiz(this,false,'exp-t04-3','t04')"><span class="opt-badge">A</span>Gurobi</div>
-<div class="quiz-opt" onclick="checkQuiz(this,true,'exp-t04-3','t04')"><span class="opt-badge">B</span>CBC</div>
-<div class="quiz-opt" data-wrong="CPLEX は商用で別途ライセンス購入が必要です。PuLP 標準には含まれません。" onclick="checkQuiz(this,false,'exp-t04-3','t04')"><span class="opt-badge">C</span>CPLEX</div>
-<div class="quiz-opt" data-wrong="GLPK は別途インストールが必要です。pip install pulp だけで使えるのは CBC です。" onclick="checkQuiz(this,false,'exp-t04-3','t04')"><span class="opt-badge">D</span>GLPK</div>
-</div>
-<div class="quiz-exp" id="exp-t04-3"><strong>正解: B</strong><br/>CBC（COIN-OR Branch and Cut）は無料の LP/MILP ソルバーで、`pip install pulp` するだけで一緒に入ります。学習用・小規模問題には十分な性能です。</div>
-</div>
-<div class="quiz-card" id="qc-t04-4">
-<div class="quiz-q"><span class="quiz-qnum">Q4</span>制約「外貨建て（米国 + 新興国）≤ 50 万円」を PuLP で書くと？</div>
-<div class="quiz-opts">
-<div class="quiz-opt" data-wrong="$=$ だと「ちょうど 50」になり、それ以下も許容できません。$\leq$ が正しい記号です。" onclick="checkQuiz(this,false,'exp-t04-4','t04')"><span class="opt-badge">A</span>problem += w["us"] + w["em"] == 50</div>
-<div class="quiz-opt" data-wrong="個別に 50 だと合計で 100 まで許してしまいます。和に対する 1 つの制約として書きます。" onclick="checkQuiz(this,false,'exp-t04-4','t04')"><span class="opt-badge">B</span>problem += w["us"] <= 50 and w["em"] <= 50</div>
-<div class="quiz-opt" onclick="checkQuiz(this,true,'exp-t04-4','t04')"><span class="opt-badge">C</span>problem += w["us"] + w["em"] <= 50</div>
-<div class="quiz-opt" data-wrong="max は非線形になり LP では使えません。和を取って線形に書きます。" onclick="checkQuiz(this,false,'exp-t04-4','t04')"><span class="opt-badge">D</span>problem += max(w["us"], w["em"]) <= 50</div>
-</div>
-<div class="quiz-exp" id="exp-t04-4"><strong>正解: C</strong><br/>$w_{us} + w_{em} \leq 50$ をそのまま Python の式として書きます。`problem += 式` で制約を追加します。</div>
-</div>
-<div class="quiz-card" id="qc-t04-5">
-<div class="quiz-q"><span class="quiz-qnum">Q5</span>Python で得た最適解と Excel で得た最適解が一致するか確認する方法は？</div>
-<div class="quiz-opts">
-<div class="quiz-opt" data-wrong="どちらのツールも操作ミスやデータ入力ミスがあり得ます。両方が一致して初めて信頼できます。" onclick="checkQuiz(this,false,'exp-t04-5','t04')"><span class="opt-badge">A</span>Python が正しいから Excel は確認不要</div>
-<div class="quiz-opt" data-wrong="浮動小数点の丸めで微小差は出ます。実用上は 2-3 桁の一致で問題ありません。" onclick="checkQuiz(this,false,'exp-t04-5','t04')"><span class="opt-badge">B</span>小数点 5 桁まで完全一致しない限り無効</div>
-<div class="quiz-opt" data-wrong="同上。両ツールの一致が検算になります。" onclick="checkQuiz(this,false,'exp-t04-5','t04')"><span class="opt-badge">C</span>Excel が正しいから Python は確認不要</div>
-<div class="quiz-opt" onclick="checkQuiz(this,true,'exp-t04-5','t04')"><span class="opt-badge">D</span>配分額と期待リターンを両ツールで並べて比較する</div>
-</div>
-<div class="quiz-exp" id="exp-t04-5"><strong>正解: D</strong><br/>3 ツール（AI / Excel / Python）で同じ最適解が出ることが、解の信頼性の最大の証拠です。今回は期待リターン 5.35 万円が一致するか確認します。</div>
-</div>
-<div class="step-locked-gate" id="gate-t04">🔒 5問すべて正解すると次が解放されます。</div>
-</div>
-</div>
-
-<!-- ═══ Topic 5: what-if 分析と前半 5 回（生産・弁当・家具・輸送・ポートフォリオ）まとめ ═══ -->
-<div class="unit-panel" id="panel-t05">
-<div class="unit-header">
-<div class="uh-kicker">Topic 5 — what-if と総まとめ</div>
-<h2>what-if 分析と前半 5 回（生産・弁当・家具・輸送・ポートフォリオ）まとめ</h2>
-<p class="uh-desc">為替制約・株式上限を変えて最適解の変化を見る。第 2-6 回の線形最適化応用 5 題を総括。</p>
-<div class="uh-tags"><span class="tag tag-stat">what-if</span>
-<span class="tag tag-stat">ツール選択</span>
-<span class="tag tag-stat">総まとめ</span>
-<span class="tag tag-stat">約13分</span></div>
-</div>
-<div class="section">
-<div class="sec-label"><span class="s-num">🎬</span>解説動画</div>
-<a class="colab-card" href="https://youtu.be/8FdSmcdDAmA" target="_blank">
-<span class="colab-icon">▶️</span>
-<div><div class="colab-title">【動画】what-if 分析と前半 5 回まとめ（掛け合い解説）</div>
-<div class="colab-desc">先生と学生の会話形式で解説します</div></div>
-<span class="colab-arrow">→ 視聴</span>
-</a>
-</div>
-<div class="obj-box">
-<div class="obj-title">// この Topic のゴール</div>
-<ul>
-<li>what-if 分析で「制約を変えたら配分はどう変わるか」を実験できる</li>
-<li>3 ツール（AI/Excel/Python）の強み・弱みで使い分けられる</li>
-<li>第 2-6 回で扱った 5 つの線形最適化応用を共通の枠組みで整理できる</li>
-</ul>
-</div>
-<div class="section">
-<div class="sec-label"><span class="s-num">①</span>確認クイズ（全5問正解で出席レスポン番号が解放）</div>
-<div class="quiz-card" id="qc-t05-1">
-<div class="quiz-q"><span class="quiz-qnum">Q1</span>為替制約を「50 万円 → 60 万円」に緩めると、最適解はどう変化する？</div>
-<div class="quiz-opts">
-<div class="quiz-opt" onclick="checkQuiz(this,true,'exp-t05-1','t05')"><span class="opt-badge">A</span>米国株が増え、期待リターンが上がる</div>
-<div class="quiz-opt" data-wrong="外貨建ての上限が緩むと、リターンの高い米国株を増やせます。配分は変化します。" onclick="checkQuiz(this,false,'exp-t05-1','t05')"><span class="opt-badge">B</span>配分は変わらない</div>
-<div class="quiz-opt" data-wrong="制約を緩めたのに現金（低リターン）を増やすのは最適化方向と逆です。" onclick="checkQuiz(this,false,'exp-t05-1','t05')"><span class="opt-badge">C</span>現金が増える</div>
-<div class="quiz-opt" data-wrong="均等配分はリターン最大化の最適解にはなりません。リターンの高い資産に寄せます。" onclick="checkQuiz(this,false,'exp-t05-1','t05')"><span class="opt-badge">D</span>すべての資産が均等になる</div>
-</div>
-<div class="quiz-exp" id="exp-t05-1"><strong>正解: A</strong><br/>為替制約が緩むと、リターン 8% の米国株を増やせます。元々制約 = 50 で米国 30 + 新興国 20 = 50 だったので、新興国は 20 万円上限に固定されたまま米国が伸びます。期待リターンは増加します。</div>
-</div>
-<div class="quiz-card" id="qc-t05-2">
-<div class="quiz-q"><span class="quiz-qnum">Q2</span>「what-if 分析」の目的として最も適切なのは？</div>
-<div class="quiz-opts">
-<div class="quiz-opt" data-wrong="デバッグとは別目的です。what-if は前提変化への感度を見る分析です。" onclick="checkQuiz(this,false,'exp-t05-2','t05')"><span class="opt-badge">A</span>コードのバグを探す</div>
-<div class="quiz-opt" onclick="checkQuiz(this,true,'exp-t05-2','t05')"><span class="opt-badge">B</span>前提条件が変わったとき最適解がどう変わるかを事前に把握する</div>
-<div class="quiz-opt" data-wrong="高速化とは無関係です。what-if は前提を変えた再計算で、計算時間は同程度です。" onclick="checkQuiz(this,false,'exp-t05-2','t05')"><span class="opt-badge">C</span>Excel を高速化する</div>
-<div class="quiz-opt" data-wrong="逆で、複数の前提に対する最適解を比較するのが what-if 分析です。" onclick="checkQuiz(this,false,'exp-t05-2','t05')"><span class="opt-badge">D</span>最適解を 1 つに絞り込む</div>
-</div>
-<div class="quiz-exp" id="exp-t05-2"><strong>正解: B</strong><br/>実務では「もし為替制約が緩んだら」「もし株価が下がったら」など複数シナリオを想定します。what-if 分析で事前に最適配分の変化を把握できます。</div>
-</div>
-<div class="quiz-card" id="qc-t05-3">
-<div class="quiz-q"><span class="quiz-qnum">Q3</span>3 ツール（AI / Excel / Python）の使い分けとして適切なのは？</div>
-<div class="quiz-opts">
-<div class="quiz-opt" data-wrong="Python は強力ですが、最初の問題理解には Excel の方が直感的です。" onclick="checkQuiz(this,false,'exp-t05-3','t05')"><span class="opt-badge">A</span>常に Python が最良</div>
-<div class="quiz-opt" data-wrong="AI は単独では検算ができず、ハルシネーションリスクがあります。場面で使い分けます。" onclick="checkQuiz(this,false,'exp-t05-3','t05')"><span class="opt-badge">B</span>常に AI が最良</div>
-<div class="quiz-opt" onclick="checkQuiz(this,true,'exp-t05-3','t05')"><span class="opt-badge">C</span>小さく試すなら AI、構造把握なら Excel、繰り返し計算なら Python</div>
-<div class="quiz-opt" data-wrong="それぞれ強み・弱みがあります。学習・本番・自動化など場面で使い分けるのが実務的です。" onclick="checkQuiz(this,false,'exp-t05-3','t05')"><span class="opt-badge">D</span>どれも同じ</div>
-</div>
-<div class="quiz-exp" id="exp-t05-3"><strong>正解: C</strong><br/>AI は素早いラフ案、Excel は GUI で構造を見ながら触る、Python は大量の what-if やバージョン管理がしやすい。**3 つを役割で使い分ける**のが本講座の核心です。</div>
-</div>
-<div class="quiz-card" id="qc-t05-4">
-<div class="quiz-q"><span class="quiz-qnum">Q4</span>第 2-6 回で扱った 5 つの線形最適化応用に共通する構造は？</div>
-<div class="quiz-opts">
-<div class="quiz-opt" data-wrong="AI でも Excel でも解けます。使うツールは問題の性格と目的で選びます。" onclick="checkQuiz(this,false,'exp-t05-4','t05')"><span class="opt-badge">A</span>必ず Python を使う</div>
-<div class="quiz-opt" data-wrong="輸送問題（L5）はコスト最小化、ポートフォリオ（L6）はリターン最大化と、目的方向は問題ごとに異なります。" onclick="checkQuiz(this,false,'exp-t05-4','t05')"><span class="opt-badge">B</span>常に最大化問題</div>
-<div class="quiz-opt" data-wrong="生産計画（L2）は 2-3 変数の小規模問題です。変数数は問題依存です。" onclick="checkQuiz(this,false,'exp-t05-4','t05')"><span class="opt-badge">C</span>必ず変数が 5 個以上</div>
-<div class="quiz-opt" onclick="checkQuiz(this,true,'exp-t05-4','t05')"><span class="opt-badge">D</span>目的関数（最大化 or 最小化）+ 制約条件 + 決定変数</div>
-</div>
-<div class="quiz-exp" id="exp-t05-4"><strong>正解: D</strong><br/>生産計画・弁当・家具・輸送・ポートフォリオ — すべて「目的関数 + 制約 + 決定変数」の 3 点セットで定式化できます。題材が違っても**同じ枠組み**で考えられるのが線形最適化の強みです。</div>
-</div>
-<div class="quiz-card" id="qc-t05-5">
-<div class="quiz-q"><span class="quiz-qnum">Q5</span>小課題（提出物）として今回 Manaba に提出するファイルは？</div>
-<div class="quiz-opts">
-<div class="quiz-opt" onclick="checkQuiz(this,true,'exp-t05-5','t05')"><span class="opt-badge">A</span>Python の `lecture06_portfolio.ipynb` か Excel の `portfolio_template.xlsx` のどちらか</div>
-<div class="quiz-opt" data-wrong="両方は不要です。Excel か Python の、自分が取り組んだ方を 1 つ提出すれば OK です。" onclick="checkQuiz(this,false,'exp-t05-5','t05')"><span class="opt-badge">B</span>必ず ipynb と xlsx の両方をセットで</div>
-<div class="quiz-opt" data-wrong="Word レポートは別の回の課題形式です。今回は Excel か Python の成果物を提出します。" onclick="checkQuiz(this,false,'exp-t05-5','t05')"><span class="opt-badge">C</span>report.docx（Word レポート）</div>
-<div class="quiz-opt" data-wrong="感想文ではなく、最適化を解いた成果物（Excel か ipynb）を提出します。" onclick="checkQuiz(this,false,'exp-t05-5','t05')"><span class="opt-badge">D</span>PDF にまとめた感想文</div>
-</div>
-<div class="quiz-exp" id="exp-t05-5"><strong>正解: A</strong><br/>今回は Excel（Solver）と Python（PuLP）のどちらで解いても構いません。自分が取り組んだ方の成果物ファイル（`lecture06_portfolio.ipynb` か `portfolio_template.xlsx`）を 1 つ Manaba に提出します。</div>
-</div>
-<div class="step-locked-gate" id="gate-t05">🔒 5問すべて正解すると出席レスポン番号が解放されます。</div>
-</div>
 <!-- ATTENDANCE -->
 <div class="section" style="margin-top:32px;">
 <div class="sec-label"><span class="s-num">🎫</span>出席レスポン番号</div>
 <div class="explain-box" style="text-align:center;">
-<div style="font-size:14px;color:var(--text-muted);margin-bottom:8px;">全Topicクリア後、ボタンを押すと <strong>10秒間だけ</strong> 表示されます。表示中に manaba のレスポンに入力してください。<strong>表示は1回のみ</strong>。</div>
-<div id="att-state" data-pw="344985162" style="font-size:28px;font-weight:700;color:var(--accent);letter-spacing:3px;margin:12px 0;">（未設定）</div>
+<div style="font-size:14px;color:var(--text-muted);margin-bottom:8px;">全Topicクリア後、ボタンを押すと <strong>10秒間だけ</strong> 表示されます。表示中に manaba のレスポンに入力してください。<br/><strong>表示は1回のみ</strong>。</div>
+<div id="att-state" data-pw="542841650" style="font-size:28px;font-weight:700;color:var(--accent);letter-spacing:3px;margin:12px 0;">（未設定）</div>
 <div style="display:flex;gap:12px;justify-content:center;margin-top:12px;">
 <button class="att-show-btn" id="att-show-btn" disabled>表示する</button>
 <button class="att-copy-btn" id="att-copy-btn" disabled>📋 コピー</button>
@@ -1840,7 +1279,7 @@ const _DECOY_E = "nebula-prime";
 // ════════════════════════════════════════
 // VERSION / STORAGE KEYS
 // ════════════════════════════════════════
-const VER = 'V_TOKURON_L06_01';
+const VER = 'V_KEI-TOKU_L07_01';
 const THEME_KEY = 'theme_' + VER;
 const DONE_KEY  = 'done_' + VER;
 const INIT_KEY  = 'init_' + VER;
@@ -1916,7 +1355,7 @@ function markDone(id) { loadDone(); doneCache[id] = true; saveDone(); }
 // ════════════════════════════════════════
 // STEP ORDER & UNLOCK
 // ════════════════════════════════════════
-const STEPS = ['t01','t02','t03','t04','t05'];
+const STEPS = ['t01','t02'];
 let currentStep = 't01';
 
 function unlockUntilStep() {
@@ -2167,7 +1606,7 @@ function showCelebration(stepId) {
     card.innerHTML = `
       <div style="font-size:52px;animation:celBounce 0.8s ease infinite">🏆</div>
       <div style="font-size:24px;font-weight:800;color:var(--accent);margin:12px 0 6px">全Topicクリア！</div>
-      <div style="font-size:14px;color:var(--text-muted);margin-bottom:20px">第5回お疲れ様でした！<br>レスポン番号を確認してください。</div>
+      <div style="font-size:14px;color:var(--text-muted);margin-bottom:20px">第7回お疲れ様でした！<br>レスポン番号を確認してください。</div>
       <div style="font-size:11px;color:var(--text-muted);opacity:0.6">タップで閉じる</div>`;
   } else {
     card.innerHTML = `
@@ -2248,11 +1687,8 @@ function launchConfetti() {
 // QUIZ
 // ════════════════════════════════════════
 const stepQuizCount = {
-  't01': { total: 5, correct: 0 },
-  't02': { total: 5, correct: 0 },
-  't03': { total: 5, correct: 0 },
-  't04': { total: 5, correct: 0 },
-  't05': { total: 5, correct: 0 },
+  't01': { total: 3, correct: 0 },
+  't02': { total: 3, correct: 0 },
 };
 
 function checkQuiz(optEl, isCorrect, expId, stepId) {
